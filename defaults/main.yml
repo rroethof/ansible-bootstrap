@@ -1,0 +1,6 @@
+---
+# defaults file for bootstrap
+
+reboot: true			# reboot after changing hostname to match inventory_hostname - set to false if you do not want to reboot
+root_password: []		# define root password for hosts....define here or in group_vars/all
+hostname: []			# define the hostname

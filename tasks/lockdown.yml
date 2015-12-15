@@ -1,0 +1,34 @@
+---
+
+- name: lockdown | changing root password
+  user:
+    name: root
+    password: "{{ root_password }}"
+
+- name: lockdown | add root RSA key to the remote host
+  authorized_key: user='root' key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+- name: lockdown | disabling password root SSH access
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PermitRootLogin"
+    line: "PermitRootLogin without-password"
+    state: present
+  notify: restart ssh
+  when: ansible_os_family == "Debian"
+
+- name: lockdown | disabling password root SSH access
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PermitRootLogin"
+    line: "PermitRootLogin without-password"
+    state: present
+  notify: restart sshd
+  when: ansible_os_family == "RedHat"
+
+- name: restart machine
+  command: shutdown -r now "Ansible updates triggered"
+  async: 0
+  poll: 0
+  ignore_errors: true
+  when: reboot == "true"
