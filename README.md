@@ -1,5 +1,6 @@
 Ansible bootstrap a new server
 ==============================
+[![Ansible Galaxy](https://img.shields.io/badge/Ansible%20Galaxy-rroethof.bootstrap-blue.svg)](https://galaxy.ansible.com/detail#/role/6556)
 
 Bootstrapping a new server using ansible.
 
