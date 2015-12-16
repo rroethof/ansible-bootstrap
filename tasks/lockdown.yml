@@ -25,10 +25,3 @@
     state: present
   notify: restart sshd
   when: ansible_os_family == "RedHat"
-
-- name: restart machine
-  command: shutdown -r now "Ansible updates triggered"
-  async: 0
-  poll: 0
-  ignore_errors: true
-  when: reboot == "true"
